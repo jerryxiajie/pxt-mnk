@@ -1,0 +1,46 @@
+{
+    "name": "minode",
+    "version": "1.0.2",
+    "description": "mi:node IoT Starter Kit - A micro:bit accessories Kit with 10 sensor modules for IoT node applications",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "minode.ts",
+        "libs/MiNode.h",
+        "libs/MiNodeComponent.h",
+        "libs/MiNodeComponent.cpp",
+        "libs/MiNodeConn.h",
+        "libs/MiNodeConn.cpp",
+        "libs/MiNodeIO.h",
+        "libs/MiNodeIO.cpp",
+        "libs/MiNodeModulePool.h",
+        "libs/MiNodeRGB.h",
+        "libs/MiNodeRGB.cpp",
+        "libs/MiNodeDHT11.cpp",
+        "libs/MiNodeDHT11.h",
+        "libs/MiNodeSwitch.cpp",
+        "libs/MiNodeSwitch.h",
+        "libs/MiNodeRotary.cpp",
+        "libs/MiNodeRotary.h",
+        "libs/MiNodePIR.cpp",
+        "libs/MiNodePIR.h",
+        "libs/MiNodeMIC.cpp",
+        "libs/MiNodeMIC.h",
+        "libs/MiNodeLightSensor.cpp",
+        "libs/MiNodeLightSensor.h",
+        "libs/MiNodeFan.cpp",
+        "libs/MiNodeFan.h",
+        "libs/minode.cpp",
+        "shims.d.ts",
+        "enums.ts",
+        "enums.d.ts"
+    ],
+    "testFiles": [
+        "tests.ts"
+    ],
+    "public": true,
+    "installedVersion": "file:../pxt-minode"
+}
