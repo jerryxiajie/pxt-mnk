@@ -187,36 +187,4 @@ namespace minode {
       pins.servoSetPulse(getanalogPin(connName),speed);
     }
 
-    /**
-     * relay control(open / close)
-     */
-    //% blockId=minode_relay_control block="relay %connName| set %status"
-    //% advanced=true
-    export function RelayControl(connName:ConnName , status:FanStatus): void
-    {
-      if(getPinProperty(connName) == 1)
-      {
-        switch(status) {
-            case 1:
-                pins.analogWritePin(getPin(connName),1023);
-              break;
-            case 2:
-                pins.analogWritePin(getPin(connName),0);
-              break;
-        }
-      }
-      else
-      {
-        switch(status) {
-            case 1:
-                pins.digitalWritePin(getPin(connName),1);
-              break;
-            case 2:
-                pins.digitalWritePin(getPin(connName),0);
-              break;
-        }
-      }
-
-    }
-
 }
