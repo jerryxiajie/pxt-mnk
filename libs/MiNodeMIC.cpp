@@ -35,9 +35,10 @@ void MiNodeMIC::systemTick()
   count++;
   int temp_ad=0;
 
-  if (count == 20)
+  if (count == 5)
   {
     temp_ad = getADvalue();
+
     if (currentAD == -1)
     {
       currentAD = temp_ad;
@@ -58,11 +59,11 @@ unsigned int MiNodeMIC::getADvalue()
 {
   unsigned int temp=0;
 
-  for (int i = 0; i < 32; ++i)
+  for (int i = 0; i < 4; ++i)
   {
     temp+=pin->read_u16();
   }
-  temp >>= 5;
+  temp >>= 2;
 
   return temp;
 }
@@ -71,6 +72,14 @@ int MiNodeMIC::getMicLevel()
 {
   unsigned int temp=0;
   temp = getADvalue();
+  if (temp > 512)
+  {
+    temp -= 512;
+  }
+  else
+  {
+    temp = 512-temp;
+  }
 
   if ((temp > MICROBIT_MIC_MIN) && (temp < MICROBIT_MIC_LEVEL_A+1))
   {
