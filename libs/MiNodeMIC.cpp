@@ -72,13 +72,13 @@ int MiNodeMIC::getMicLevel()
 {
   unsigned int temp=0;
   temp = pin->read_u16();
-  if (temp > 512)
+  if (temp > 530)
   {
-    temp -= 512;
+    temp -= 530;
   }
   else
   {
-    temp = 512-temp;
+    temp = 530-temp;
   }
 
   if ((temp > MICROBIT_MIC_MIN) && (temp < MICROBIT_MIC_LEVEL_A+1))
