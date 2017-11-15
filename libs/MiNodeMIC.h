@@ -13,7 +13,7 @@
 
 #define MINODE_MIC_EVT_NOISE                  1
 
-#define MINODE_MIC_NOISE_THRESHOLD            50
+#define MINODE_MIC_NOISE_THRESHOLD            10
 
 #define MICROBIT_MIC_MIN                     0
 #define MICROBIT_MIC_LEVEL_A                 10
@@ -45,7 +45,6 @@ class MiNodeMIC : public MiNodeComponent
 
   private:
     AnalogIn* pin;
-    int count;
     int currentAD;
 
 };

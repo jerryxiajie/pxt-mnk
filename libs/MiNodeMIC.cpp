@@ -32,26 +32,21 @@ void MiNodeMIC::attach(AnalogConnName connName)
 
 void MiNodeMIC::systemTick()
 {
-  count++;
   int temp_ad=0;
 
-  if (count == 5)
-  {
-    temp_ad = getADvalue();
+  temp_ad = getADvalue();
 
-    if (currentAD == -1)
+  if (currentAD == -1)
+  {
+    currentAD = temp_ad;
+  }
+  else
+  {
+    if ((temp_ad - currentAD > MINODE_MIC_NOISE_THRESHOLD) || (temp_ad - currentAD < (0-MINODE_MIC_NOISE_THRESHOLD)))
     {
+      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
       currentAD = temp_ad;
     }
-    else
-    {
-      if ((temp_ad - currentAD > MINODE_MIC_NOISE_THRESHOLD) || (temp_ad - currentAD < (0-MINODE_MIC_NOISE_THRESHOLD)))
-      {
-        MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
-        currentAD = temp_ad;
-      }
-    }
-    count = 0;
   }
 }
 
