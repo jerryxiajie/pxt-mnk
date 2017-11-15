@@ -16,10 +16,10 @@
 #define MINODE_MIC_NOISE_THRESHOLD            50
 
 #define MICROBIT_MIC_MIN                     0
-#define MICROBIT_MIC_LEVEL_A                 10
-#define MICROBIT_MIC_LEVEL_B                 22
-#define MICROBIT_MIC_LEVEL_C                 30
-#define MICROBIT_MIC_LEVEL_D                 40
+#define MICROBIT_MIC_LEVEL_A                 20
+#define MICROBIT_MIC_LEVEL_B                 28
+#define MICROBIT_MIC_LEVEL_C                 35
+#define MICROBIT_MIC_LEVEL_D                 46
 #define MICROBIT_MIC_MAX                     1023
 
 #define MICROBIT_MIC_LEVEL_NULL              0
