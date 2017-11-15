@@ -59,11 +59,11 @@ unsigned int MiNodeMIC::getADvalue()
 {
   unsigned int temp=0;
 
-  for (int i = 0; i < 4; ++i)
+  for (int i = 0; i < 2; ++i)
   {
     temp+=pin->read_u16();
   }
-  temp >>= 2;
+  temp >>= 1;
 
   return temp;
 }
