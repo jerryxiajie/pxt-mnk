@@ -17,8 +17,8 @@
 
 #define MICROBIT_MIC_MIN                     0
 #define MICROBIT_MIC_LEVEL_A                 10
-#define MICROBIT_MIC_LEVEL_B                 18
-#define MICROBIT_MIC_LEVEL_C                 25
+#define MICROBIT_MIC_LEVEL_B                 22
+#define MICROBIT_MIC_LEVEL_C                 30
 #define MICROBIT_MIC_LEVEL_D                 40
 #define MICROBIT_MIC_MAX                     1023
 
