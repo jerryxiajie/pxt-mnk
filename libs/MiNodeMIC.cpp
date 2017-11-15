@@ -71,7 +71,7 @@ unsigned int MiNodeMIC::getADvalue()
 int MiNodeMIC::getMicLevel()
 {
   unsigned int temp=0;
-  temp = getADvalue();
+  temp = pin->read_u16();
   if (temp > 512)
   {
     temp -= 512;
