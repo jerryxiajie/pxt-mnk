@@ -40,7 +40,8 @@ class MiNodeMIC : public MiNodeComponent
 
     void attach(AnalogConnName connName);
 
-    virtual void systemTick();
+    
+   // virtual void systemTick();
     ~MiNodeMIC();
 
   private:
