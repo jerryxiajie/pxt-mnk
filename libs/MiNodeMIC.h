@@ -40,13 +40,14 @@ class MiNodeMIC : public MiNodeComponent
 
     void attach(AnalogConnName connName);
 
-    
+
    // virtual void systemTick();
     ~MiNodeMIC();
 
   private:
     AnalogIn* pin;
     int currentAD;
+    Ticker timer;
 
 };
 

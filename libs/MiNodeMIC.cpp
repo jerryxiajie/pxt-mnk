@@ -1,5 +1,4 @@
 #include "MiNodeMIC.h"
-#include "us_ticker_api.h"
 
 MiNodeMIC::MiNodeMIC() :
 pin(NULL),count(0),currentAD(-1)
@@ -37,12 +36,10 @@ void MiNodeMIC::attach(AnalogConnName connName)
                     (ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
 
   // ToDo: Init a timer      
-  us_ticker_init();
-
-  us_ticker_set_interrupt(50);
+  timer.attach_us(&attime, 50);
 }
 
-void us_ticker_irq_handler(void)
+void attime(void)
 {
   if (count == 0)
   {
@@ -52,7 +49,8 @@ void us_ticker_irq_handler(void)
   else
   {
     count = 0;
-    if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
+    //if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
+    if(currentAD > 0)
     {
       MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
     }
