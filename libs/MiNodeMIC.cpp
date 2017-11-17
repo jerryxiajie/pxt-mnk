@@ -1,7 +1,7 @@
 #include "MiNodeMIC.h"
 
 MiNodeMIC::MiNodeMIC() :
-pin(NULL),count(0),currentAD(-1)
+pin(NULL)
 {
   this->baseId = MINODE_ID_MODULE_LIGHT;
   system_timer_add_component(this);
@@ -15,24 +15,18 @@ MiNodeMIC::~MiNodeMIC()
   system_timer_remove_component(this);
 }
 
-void attime(void)
+void MiNodeMIC::update(void)
 {
-  if (count == 0)
-  {
-    count = 1;
-    currentAD = getADvalue();
-  }
-  else
-  {
-    count = 0;
-    //if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
-    if(currentAD > 0)
-    {
-      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
-    }
-  }
-}
+  static int adHolder = 530;
+  int newValue = pin->read_u16();
 
+  if(newValue - adHolder > 20)
+  {
+    MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
+  }
+  adHolder = newValue;
+
+}
 
 void MiNodeMIC::attach(AnalogConnName connName)
 {
@@ -51,47 +45,13 @@ void MiNodeMIC::attach(AnalogConnName connName)
   NRF_ADC->CONFIG = (ADC_CONFIG_RES_8bit << ADC_CONFIG_RES_Pos) |
                     (ADC_CONFIG_INPSEL_AnalogInputOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) |
                     (ADC_CONFIG_REFSEL_SupplyOneThirdPrescaling << ADC_CONFIG_REFSEL_Pos) |
-                    (analogInputPin << ADC_CONFIG_PSEL_Pos) |
+                    (pinName << ADC_CONFIG_PSEL_Pos) |
                     (ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
 
   // ToDo: Init a timer      
-  timer.attach_us(&attime, 50);
+  timer.attach_us(this, &MiNodeMIC::update, 50);
 }
 
-/*
-void MiNodeMIC::systemTick()
-{
-  int temp_ad=0;
-
-  temp_ad = getADvalue();
-
-  if (currentAD == -1)
-  {
-    currentAD = temp_ad;
-  }
-  else
-  {
-    if ((temp_ad - currentAD > MINODE_MIC_NOISE_THRESHOLD) || (temp_ad - currentAD < (0-MINODE_MIC_NOISE_THRESHOLD)))
-    {
-      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
-      currentAD = temp_ad;
-    }
-  }
-}
-*/
-
-unsigned int MiNodeMIC::getADvalue()
-{
-  unsigned int temp=0;
-
-  for (int i = 0; i < 2; ++i)
-  {
-    temp+=pin->read_u16();
-  }
-  temp >>= 1;
-
-  return temp;
-}
 
 int MiNodeMIC::getMicLevel()
 {

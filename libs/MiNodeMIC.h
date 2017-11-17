@@ -37,6 +37,7 @@ class MiNodeMIC : public MiNodeComponent
 
     unsigned int getADvalue();
     int getMicLevel();
+    void update();
 
     void attach(AnalogConnName connName);
 
@@ -46,7 +47,6 @@ class MiNodeMIC : public MiNodeComponent
 
   private:
     AnalogIn* pin;
-    int currentAD;
     Ticker timer;
 
 };
