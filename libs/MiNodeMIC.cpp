@@ -15,6 +15,25 @@ MiNodeMIC::~MiNodeMIC()
   system_timer_remove_component(this);
 }
 
+void attime(void)
+{
+  if (count == 0)
+  {
+    count = 1;
+    currentAD = getADvalue();
+  }
+  else
+  {
+    count = 0;
+    //if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
+    if(currentAD > 0)
+    {
+      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
+    }
+  }
+}
+
+
 void MiNodeMIC::attach(AnalogConnName connName)
 {
   if(this->cn != MN_NC) {
@@ -37,24 +56,6 @@ void MiNodeMIC::attach(AnalogConnName connName)
 
   // ToDo: Init a timer      
   timer.attach_us(&attime, 50);
-}
-
-void attime(void)
-{
-  if (count == 0)
-  {
-    count = 1;
-    currentAD = getADvalue();
-  }
-  else
-  {
-    count = 0;
-    //if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
-    if(currentAD > 0)
-    {
-      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
-    }
-  }
 }
 
 /*
