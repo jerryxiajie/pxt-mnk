@@ -1,4 +1,5 @@
 #include "MiNodeMIC.h"
+#include "us_ticker_api.h"
 
 MiNodeMIC::MiNodeMIC() :
 pin(NULL),count(0),currentAD(-1)
