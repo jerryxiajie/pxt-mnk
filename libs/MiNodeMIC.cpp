@@ -28,8 +28,37 @@ void MiNodeMIC::attach(AnalogConnName connName)
     delete pin;
   }
   pin = new AnalogIn(pinName);
+
+  NRF_ADC->CONFIG = (ADC_CONFIG_RES_8bit << ADC_CONFIG_RES_Pos) |
+                    (ADC_CONFIG_INPSEL_AnalogInputOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) |
+                    (ADC_CONFIG_REFSEL_SupplyOneThirdPrescaling << ADC_CONFIG_REFSEL_Pos) |
+                    (analogInputPin << ADC_CONFIG_PSEL_Pos) |
+                    (ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
+
+  // ToDo: Init a timer      
+  us_ticker_init();
+
+  us_ticker_set_interrupt(50);
 }
 
+void us_ticker_irq_handler(void)
+{
+  if (count == 0)
+  {
+    count = 1;
+    currentAD = getADvalue();
+  }
+  else
+  {
+    count = 0;
+    if ((currentAD - getADvalue() > 10) || (getADvalue() - currentAD < (10)))
+    {
+      MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
+    }
+  }
+}
+
+/*
 void MiNodeMIC::systemTick()
 {
   int temp_ad=0;
@@ -49,6 +78,7 @@ void MiNodeMIC::systemTick()
     }
   }
 }
+*/
 
 unsigned int MiNodeMIC::getADvalue()
 {
