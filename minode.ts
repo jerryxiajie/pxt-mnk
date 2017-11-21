@@ -151,15 +151,6 @@ namespace minode {
     }
 
     /**
-     * Get MIC level.from 1(quiet) to 5(noisy).
-     */
-    //% blockId=minode_MIC_GET_mic_level block="mic %connName| get level"
-    //% shim=minode::MICGetLevel
-    export function MICGetLevel(connName: AnalogConnName): number{
-      return 0;
-    }
-
-    /**
      * Do something when Light level change.
      */
     //% blockId=minode_on_LightSensor_CHANGE block="light %connName| on change"

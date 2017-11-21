@@ -35,9 +35,9 @@ class MiNodeMIC : public MiNodeComponent
   public:
     MiNodeMIC();
 
-    unsigned int getADvalue();
     int getMicLevel();
     void update();
+    void checking();
 
     void attach(AnalogConnName connName);
 
