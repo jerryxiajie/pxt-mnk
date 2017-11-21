@@ -40,7 +40,7 @@ void MiNodeMIC::checking(void)
   if (tri_flag == 1)
   {
     time_count++;
-    if (time_count > 8000)
+    if (time_count > 1000)
     {
       tri_flag = 0;
       time_count = 0;
