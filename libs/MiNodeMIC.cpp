@@ -55,7 +55,7 @@ void MiNodeMIC::checking(void)
     }
     temp /= 8;
 
-    if(temp > 300)
+    if(temp > 200)
     {
       MicroBitEvent evt(this->baseId + this->id,MINODE_MIC_EVT_NOISE);
       tri_flag = 1;
